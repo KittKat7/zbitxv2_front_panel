@@ -39,8 +39,9 @@ typedef struct {
 // fontdata[n] — same indexing as TFT_eSPI: 2=Font16 (16px), 4=Font32rle (26px)
 extern const fontinfo fontdata[];
 
-// GLCD 5×7 bitmap font (used by screen_draw_mono in screen_gx.cpp)
-extern const unsigned char font[];
+// GLCD 5×7 bitmap font accessor — glcdfont.c declares the table "static",
+// so it cannot be shared across translation units via an extern declaration.
+const unsigned char *glcd_font();
 
 // ─── ILI9488 driver class ─────────────────────────────────────────────────────
 class TFT_ILI9488 {

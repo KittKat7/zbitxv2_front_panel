@@ -101,7 +101,7 @@ void screen_draw_mono(const char *text, int count, int x_at, int y_at, uint16_t 
 
   for (int i = 0; i < count; i++){
     for (int col = 0; col < 5; col++){
-      char bits = pgm_read_byte(&font[0] + ((text[i]*5) + col));
+      char bits = pgm_read_byte(&glcd_font()[0] + ((text[i]*5) + col));
       uint8_t mask = 0x01;
       uint16_t *p = pixel_line;
       for (int row = 0; row < 7; row++){

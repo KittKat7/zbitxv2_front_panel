@@ -81,6 +81,9 @@ static int _dma_rx_ch = -1;
 #include "fonts/Font16.c"
 #include "fonts/Font32rle.c"
 
+// glcdfont.c declares its table "static"; expose it to other translation units.
+const unsigned char *glcd_font() { return font; }
+
 #define chr_hgt_f16   16
 #define baseline_f16  13
 #define chr_hgt_f32   26
@@ -529,7 +532,7 @@ int16_t TFT_ILI9488::_drawChar(uint8_t c, int32_t x, int32_t y) {
         // GLCD 5×7 bitmap: 5 bytes per char, each byte is a column
         // (bit 0 = top pixel).  Rendered as 6 px wide (1 px right-side spacing)
         // and 8 px tall (row 7 is inter-line spacing, always blank).
-        const uint8_t *glyph = font + (uint16_t)c * 5;
+        const uint8_t *glyph = glcd_font() + (uint16_t)c * 5;
         const uint8_t  gw = 5;
 
         _beginTransaction();
